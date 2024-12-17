@@ -14,8 +14,8 @@ export class OrderProductsRepository implements IOrderProductsRepository {
       quantity: item.quantity,
       totalPrice: item.totalPrice,
       productId: item.productId,
+      orderId: item.orderId,
     }));
-    console.log(data);
     await this.prisma.orderProduct.createMany({
       data,
     });

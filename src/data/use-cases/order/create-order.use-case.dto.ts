@@ -13,10 +13,13 @@ export namespace ICreateOrderCase {
     @ApiProperty()
     description: string;
     @ApiProperty({
-      type: OmitType(OrderProduct, ['createdAt', 'updatedAt']),
+      type: OmitType(OrderProduct, ['createdAt', 'updatedAt', 'orderId', 'id']),
       isArray: true,
     })
-    products: Omit<OrderProduct, 'createdAt' | 'updatedAt'>[];
+    products: Omit<
+      OrderProduct,
+      'createdAt' | 'updatedAt' | 'orderId' | 'id'
+    >[];
   }
   export class CreateOrderOutput extends Order {
     @ApiProperty({ type: OrderProduct, isArray: true })

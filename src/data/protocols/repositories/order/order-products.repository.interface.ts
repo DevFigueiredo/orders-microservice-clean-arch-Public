@@ -7,10 +7,7 @@ export interface IOrderProductsRepository {
 }
 export namespace IOrderProductsRepository {
   export type CreateOrderProductsInput = {
-    orderProducts: Omit<
-      OrderProduct,
-      'createdAt' | 'updatedAt' | 'id' | 'orderId'
-    >[];
+    orderProducts: Omit<OrderProduct, 'createdAt' | 'updatedAt' | 'id'>[];
     orderId: number;
   };
   export type CreateOrderProductsOutput = OrderProduct[];

@@ -61,7 +61,10 @@ export class CreateOrderCase implements ICreateOrderCase {
     );
   }
 
-  private async createOrderProducts(orderId: number, products: any[]) {
+  private async createOrderProducts(
+    orderId: number,
+    products: ICreateOrderCase.CreateOrderInput['products'],
+  ) {
     return this.orderProductsRepository.create({
       orderId,
       orderProducts: products.map(
