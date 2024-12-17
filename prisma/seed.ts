@@ -1,17 +1,9 @@
 import { PrismaClient } from '@prisma/client';
-import * as seeds from './seeds';
-
 const prisma = new PrismaClient({
   log: [{ level: 'error', emit: 'event' }],
 });
 
-async function main(): Promise<void> {
-  await prisma.$transaction(async (transaction) => {
-    await transaction.product.createMany({
-      data: seeds.products,
-    });
-  });
-}
+async function main(): Promise<void> {}
 
 main()
   .then(() => {

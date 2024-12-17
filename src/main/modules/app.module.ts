@@ -5,17 +5,23 @@ import { AxiosHttpClient } from '@src/infra/adapters/axios-http-adapter';
 import { AuthController } from '@src/presentation/controllers/auth.controller';
 import { PrismaDb } from '../config/prisma/prisma-db.config';
 import { BCryptPassword } from '@src/utils/bcrypt-password.utils';
-import { ProductsRepository } from '@src/infra/db/products/products.repository';
-import { ProductsController } from '@src/presentation/controllers/products.controller';
-import { GetProductsCase } from '@src/data/use-cases/products/get-products.use-case';
+import { OrderRepository } from '@src/infra/db/order/order.repository';
+import { OrderProductsRepository } from '@src/infra/db/order/order-products.repository';
+import { CreateOrderCase } from '@src/data/use-cases/order/create-order.use-case';
+import { OrderController } from '@src/presentation/controllers/order.controller';
+import { UserTokenData } from '@src/utils/token-data.utils';
+import { RemoteGetProducts } from '@src/infra/integrations/remote-get-products.integration';
 
 @Module({
   imports: [],
-  controllers: [AuthController, ProductsController],
+  controllers: [AuthController, OrderController],
   providers: [
     AuthUseCase,
-    GetProductsCase,
-    ProductsRepository,
+    CreateOrderCase,
+    OrderRepository,
+    OrderProductsRepository,
+    UserTokenData,
+    RemoteGetProducts,
     JwtTokenAdapter,
     PrismaDb,
     {

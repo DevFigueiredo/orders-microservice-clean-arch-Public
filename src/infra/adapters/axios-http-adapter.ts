@@ -13,13 +13,13 @@ export class AxiosHttpClient implements IHttpClient {
     this.axiosInstance = axios.create(config);
   }
 
-  async get<T>(url: string, params?: any): Promise<T> {
-    const response = await this.axiosInstance.get<T>(url, { params });
+  async get<T>(url: string, config?: any): Promise<T> {
+    const response = await this.axiosInstance.get<T>(url, config);
     return response.data;
   }
 
-  async post<T>(url: string, data: any, headers?: any): Promise<T> {
-    const response = await this.axiosInstance.post<T>(url, data, headers);
+  async post<T>(url: string, data: any, config?: any): Promise<T> {
+    const response = await this.axiosInstance.post<T>(url, data, config);
     return response.data;
   }
   async patch<T>(url: string, data: any): Promise<T> {

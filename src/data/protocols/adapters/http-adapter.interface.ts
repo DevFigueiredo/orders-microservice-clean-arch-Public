@@ -23,8 +23,8 @@ export namespace IHttpClient {
   }
 }
 export interface IHttpClient {
-  get<T>(url: string, params?: any): Promise<T>;
-  post<T>(url: string, data: any, headers?: AxiosRequestConfig): Promise<T>;
+  get<T>(url: string, config?: AxiosRequestConfig): Promise<T>;
+  post<T>(url: string, data: any, config?: AxiosRequestConfig): Promise<T>;
   put<T>(url: string, data: any): Promise<T>;
   delete<T>(url: string): Promise<T>;
   create(config?: any): IHttpClient; // Adiciona o método create

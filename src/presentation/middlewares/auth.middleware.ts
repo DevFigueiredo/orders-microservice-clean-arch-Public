@@ -8,11 +8,13 @@ import {
 } from '@nestjs/common';
 import { AxiosHttpClient } from '@src/infra/adapters/axios-http-adapter';
 import { IHttpClient } from '@src/data/protocols/adapters/http-adapter.interface';
+import { UserTokenData } from '@src/utils/token-data.utils';
 
 @Injectable()
 export class AuthMiddleware implements CanActivate {
   constructor(
     @Inject(AxiosHttpClient) private readonly httpClient: IHttpClient,
+    private readonly userTokenData: UserTokenData,
   ) {}
 
   async canActivate(context: ExecutionContext): Promise<boolean> {
@@ -26,7 +28,7 @@ export class AuthMiddleware implements CanActivate {
     const token = authHeader.split(' ')[1];
 
     try {
-      await this.httpClient.post(
+      const response = await this.httpClient.post<{ id: number }>(
         `${process.env.MICROSERVICE_AUTH_URL}/check-session`,
         {},
         {
@@ -35,7 +37,10 @@ export class AuthMiddleware implements CanActivate {
           },
         },
       );
-
+      this.userTokenData.set({
+        id: response.id,
+      });
+      this.userTokenData.setToken(token);
       return true;
     } catch (error) {
       throw new HttpException(
