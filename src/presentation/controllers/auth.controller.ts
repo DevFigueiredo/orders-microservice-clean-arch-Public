@@ -1,4 +1,11 @@
-import { Body, Controller, Inject, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  HttpCode,
+  HttpStatus,
+  Inject,
+  Post,
+} from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { IAuthUseCase } from '@src/data/use-cases/auth/auth.use-case.dto';
 import { AuthUseCase } from 'src/data/use-cases/auth/auth.use-case';
@@ -12,6 +19,7 @@ export class AuthController {
   ) {}
 
   @Post('/login')
+  @HttpCode(HttpStatus.OK)
   async login(
     @Body() payload: IAuthUseCase.Input,
   ): Promise<IAuthUseCase.Output> {

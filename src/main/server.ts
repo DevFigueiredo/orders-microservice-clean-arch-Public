@@ -1,12 +1,17 @@
+import '../infra/observability/telemetry/telemetry';
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './modules/app.module';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+import logger from '@src/infra/observability/logger/logger';
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
+  const app = await NestFactory.create(AppModule, {
+    logger,
+    bufferLogs: true,
+  });
   const config = new DocumentBuilder()
-    .setTitle('Products Microservice')
-    .setDescription('The Products API')
+    .setTitle('Orders Microservice')
+    .setDescription('The Orders API')
     .setVersion('1.0')
     .addBearerAuth(
       {
