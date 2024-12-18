@@ -14,7 +14,7 @@ export class OrderController {
 
   @AuthGuard()
   @ApiResponse({ isArray: true, type: ICreateOrderCase.CreateOrderOutput })
-  @Post('/order')
+  @Post('/orders')
   async create(
     @Body() payload: ICreateOrderCase.CreateOrderInput,
   ): Promise<ICreateOrderCase.CreateOrderOutput> {
